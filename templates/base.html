@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'bootstrap/bootstrap-5.0.0-beta2-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'base.css' %}" rel="stylesheet">
+    <title>To-Do lists</title>
+</head>
+
+<body>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="display-3">{% block header_text %}{% endblock %}</h1>
+
+            <form method="post" action={% block form_action %}{% endblock %}>
+                <input name="item_text" id="id_new_item"  placeholder="Enter a to-do item" class="form-control input-lg"/>
+                {% csrf_token %}
+            </form>
+
+            <p class="lead text-muted">Press <kbd>Enter</kbd> to add the item.</p>
+        </div>
+    </div>
+
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <div>
+                {% block table %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

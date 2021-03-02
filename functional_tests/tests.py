@@ -3,12 +3,13 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 import time
-from django.test import LiveServerTestCase
+# from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 MAX_WAIT = 10
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.chromedriver = 'C:\\Users\\ShionLee\\chromedriver_win32\\chromedriver.exe'
@@ -55,7 +56,7 @@ class NewVisitorTest(LiveServerTestCase):
         # 她按回车键后，页面更新了
         # 待办事项表格中显示了"1: Buy peacock feathers"
         inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
+        self.wait_for_row_in_list_table('1 Buy peacock feathers')
 
         # 页面中又显示了一个文本框，可以输入其他的待办事项
         # 她输入了"Use peacock feathers to make a fly"（使用孔雀羽毛做假蝇）
@@ -65,8 +66,8 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys(Keys.ENTER)
 
         # 页面再次更新，她的清单中显示了这两个待办事项
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
-        self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
+        self.wait_for_row_in_list_table('1 Buy peacock feathers')
+        self.wait_for_row_in_list_table('2 Use peacock feathers to make a fly')
 
         # 伊迪斯想知道这个网站是否会记住她的清单
         # 她看到网站为她生成了一个唯一的URL
@@ -83,7 +84,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Buy peacock feathers')
         inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy peacock feathers')
+        self.wait_for_row_in_list_table('1 Buy peacock feathers')
 
         # 她注意到清单有个唯一的URL
         edith_list_url = self.browser.current_url
@@ -108,7 +109,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Buy milk')
         inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy milk')
+        self.wait_for_row_in_list_table('1 Buy milk')
 
         # 弗朗西斯获得了他唯一的URL
         francis_list_url = self.browser.current_url
