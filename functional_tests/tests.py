@@ -15,9 +15,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.chromedriver = 'C:\\Users\\ShionLee\\chromedriver_win32\\chromedriver.exe'
         self.browser = webdriver.Chrome(self.chromedriver)
-        staging_server = os.environ.get('STAGING_SERVER')
-        if staging_server:
-            self.live_server_url = 'http://' + staging_server
+        # staging_server = os.environ.get('STAGING_SERVER')
+        # if staging_server:
+        #     self.live_server_url = 'http://' + staging_server
+        self.live_server_url = 'http://121.4.214.47/'
 
     def tearDown(self):
         self.browser.quit()
